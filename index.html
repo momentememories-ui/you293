@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Loy Krathong Season🪷✨</title>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Prompt', sans-serif;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        body, html {
+            width: 100vw;
+            height: 100vh;
+            background-color: #000;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .mobile-container {
+            width: 100vw;
+            height: 100vh;
+            max-width: 100%;
+            max-height: 100vh;
+            background: #fff0f5 url('พื้นหลัง.png') no-repeat center center;
+            background-size: cover;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .water-section {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 70%;
+            overflow: hidden;
+            pointer-events: auto;
+            background: linear-gradient(to bottom, rgba(255, 182, 193, 0.05), rgba(255, 105, 180, 0.25));
+        }
+
+        .ui-header {
+            position: absolute;
+            top: 25px;
+            width: 100%;
+            text-align: center;
+            z-index: 10;
+            color: #d81b60;
+            text-shadow: 0 1px 3px rgba(255,255,255,0.8);
+        }
+
+        .ui-header p {
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.9);
+            display: inline-block;
+            padding: 8px 22px;
+            border-radius: 20px;
+            border: 2px solid #ffb6c1;
+            color: #d81b60;
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(255, 182, 193, 0.4);
+        }
+
+        .floating-krathong {
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            background-image: url('กระทง.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            cursor: pointer;
+            transform: translate(-50%, -50%);
+            z-index: 5;
+            filter: drop-shadow(0 5px 5px rgba(0,0,0,0.3));
+        }
+
+        .floating-krathong.no-image {
+            background: radial-gradient(circle, #ff69b4, #c71585);
+            border-radius: 50%;
+            border: 3px solid #fff;
+        }
+
+        .giant-krathong-container {
+            position: absolute;
+            top: 58%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 20;
+            display: none;
+            animation: bounceIn 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes bounceIn {
+            0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+        }
+
+        .giant-krathong {
+            width: 400px;
+            height: 400px;
+            background-image: url('กระทง.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            position: relative;
+            margin: 0 auto;
+            filter: drop-shadow(0 12px 20px rgba(0,0,0,0.4));
+        }
+
+        .giant-krathong.no-image {
+            background: radial-gradient(circle, #ffb6c1, #ff1493);
+            border-radius: 50%;
+            border: 6px solid #fff;
+        }
+
+        .question-mark {
+            position: absolute;
+            top: 18%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 80px;
+            animation: pulse 1.2s infinite ease-in-out;
+            cursor: pointer;
+            z-index: 25;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.15); }
+        }
+
+        .couple-photo {
+            position: absolute;
+            top: -95px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: auto;
+            height: 240px;
+            max-width: 90vw;
+            object-fit: contain;
+            display: none;
+            cursor: pointer;
+            z-index: 25;
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
+            filter: none !important;
+            border-radius: 0 !important;
+            animation: enticingPulse 1.5s infinite ease-in-out;
+        }
+
+        @keyframes enticingPulse {
+            0%, 100% { transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.06); }
+        }
+
+        /* ข้อความล่างสุดเปลี่ยนเป็นสีขาวเรียบร้อยแล้ว */
+        .bottom-hint-text {
+            position: absolute;
+            bottom: 25px;
+            width: 100%;
+            text-align: center;
+            color: #ffffff;
+            font-size: 0.95rem;
+            font-weight: 600;
+            z-index: 30;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+            animation: textPulse 1.5s infinite ease-in-out;
+            pointer-events: none;
+            display: none;
+        }
+
+        @keyframes textPulse {
+            0%, 100% { opacity: 0.7; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+
+        .modal-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 182, 193, 0.5);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 100;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 10px;
+        }
+
+        .puzzle-box {
+            background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255, 240, 245, 0.95));
+            padding: 15px;
+            border-radius: 25px;
+            text-align: center;
+            width: 100%;
+            max-width: 340px;
+            box-shadow: 0 15px 40px rgba(216, 27, 96, 0.25);
+            border: 4px solid #ff69b4;
+        }
+
+        .puzzle-box h2 {
+            font-size: 1.2rem;
+            color: #d81b60;
+            margin-bottom: 3px;
+        }
+
+        .puzzle-box p {
+            font-size: 0.8rem;
+            color: #c71585;
+            margin-bottom: 10px;
+        }
+
+        .puzzle-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 2px;
+            width: 270px;
+            height: 480px;
+            margin: 0 auto 10px auto;
+            background: rgba(255, 182, 193, 0.4);
+            padding: 4px;
+            border-radius: 14px;
+            border: 2px solid #ff1493;
+        }
+
+        .puzzle-piece {
+            width: 88px;
+            height: 158px;
+            background-image: url('photo1.jpg');
+            background-size: 264px 474px;
+            cursor: grab;
+            border-radius: 6px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+            touch-action: none;
+            transition: transform 0.1s, box-shadow 0.1s;
+            position: relative;
+            border: 2px dashed rgba(255, 255, 255, 0.6);
+        }
+
+        .puzzle-piece:active {
+            cursor: grabbing;
+            transform: scale(1.03);
+            z-index: 10;
+        }
+
+        .puzzle-piece.dragging {
+            opacity: 0.85;
+            border: 3px dashed #ff1493;
+            box-shadow: 0 0 15px #ff69b4;
+            transform: scale(1.06);
+            z-index: 20;
+        }
+
+        .puzzle-piece.drag-over {
+            border: 3px solid #ff1493;
+            background-color: rgba(255, 105, 180, 0.4);
+            box-shadow: inset 0 0 15px #ff1493;
+        }
+
+        .completed-preview {
+            width: 270px;
+            height: 480px;
+            background-image: url('photo1.jpg');
+            background-size: cover;
+            background-position: center;
+            border-radius: 14px;
+            margin: 0 auto 10px auto;
+            border: 3px solid #ff69b4;
+            box-shadow: 0 8px 25px rgba(216, 27, 96, 0.4);
+            display: none;
+        }
+
+        .fireworks-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 120;
+            display: none;
+            overflow: hidden;
+        }
+
+        .firework-particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            animation: explodeRealistic 2s ease-out forwards;
+        }
+
+        @keyframes explodeRealistic {
+            0% { transform: translate(0, 0) scale(1); opacity: 1; filter: brightness(2); }
+            50% { opacity: 1; }
+            100% { transform: translate(var(--tx), var(--ty)) scale(0.1); opacity: 0; }
+        }
+
+        .wish-modal {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 182, 193, 0.75);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 150;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .wish-box-center {
+            background: linear-gradient(135deg, #ffffff, #fff0f5);
+            width: 90%;
+            max-width: 360px;
+            padding: 25px 20px;
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(216, 27, 96, 0.3);
+            text-align: center;
+            border: 4px solid #ff69b4;
+            transform: scale(0.8);
+            animation: popUpWish 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes popUpWish {
+            to { transform: scale(1); }
+        }
+
+        .wish-box-center h3 {
+            color: #d81b60;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .wish-box-center p {
+            color: #880e4f;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            min-height: 80px;
+        }
+
+        .close-wish-btn {
+            margin-top: 15px;
+            background: linear-gradient(135deg, #ff69b4, #d81b60);
+            color: #fff;
+            border: none;
+            padding: 8px 25px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(216, 27, 96, 0.4);
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="bgMusic" src="song.mp3" loop autoplay></audio>
+
+    <div class="mobile-container">
+        <div class="ui-header" id="uiHeader">
+            <p id="scoreText">เก็บกระทง: 0 / 20</p>
+        </div>
+
+        <div class="water-section" id="waterSection"></div>
+
+        <div class="giant-krathong-container" id="giantContainer">
+            <div class="giant-krathong" id="giantKrathong">
+                <img src="nong.png" alt="Question" class="question-mark" id="questionMark" onerror="this.style.background='#ffb6c1';this.style.borderRadius='50%';">
+                <img src="photo.png" alt="Couple Photo" class="couple-photo" id="couplePhoto">
+            </div>
+        </div>
+
+        <!-- ข้อความล่างสุด (สีขาว) -->
+        <div class="bottom-hint-text" id="bottomHintText">แตะหน้าจอเพื่อเริ่มเพลง</div>
+
+        <div class="modal-overlay" id="puzzleModal">
+            <div class="puzzle-box">
+                <div id="puzzleContentArea">
+                    <h2>🧩 ช่วยต่อจิ๊กซอว์หน่อยย</h2>
+                    <p>ลากจิ๊กซอว์ไปวางสลับช่องอื่น เพื่อต่อภาพได้เลย💖</p>
+                    <div class="puzzle-grid" id="puzzleGrid"></div>
+                </div>
+                <div class="completed-preview" id="completedPreview"></div>
+                <h3 id="successText" style="color: #d81b60; display: none; margin-top: 8px; font-weight: 600; font-size: 0.95rem;"> เก่งที่สุดเลยย~ ✨</h3>
+            </div>
+        </div>
+
+        <div class="fireworks-container" id="fireworksContainer"></div>
+
+        <div class="wish-modal" id="wishModal">
+            <div class="wish-box-center">
+                <h3>✨ คำอธิษฐาน ✨</h3>
+                <p id="typedText"></p>
+                <button class="close-wish-btn" onclick="closeWishModal()">ปิด</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const bgMusic = document.getElementById('bgMusic');
+        const bottomHintText = document.getElementById('bottomHintText');
+        
+        // แสดงข้อความ "แตะหน้าจอเพื่อเริ่มเพลง" ไว้ที่ด้านล่างสุดตอนเริ่มเปิดเว็บ
+        bottomHintText.style.display = 'block';
+
+        let isMusicStarted = false;
+        document.body.addEventListener('click', () => {
+            if (bgMusic.paused) {
+                bgMusic.play().catch(e => {});
+            }
+            if (!isMusicStarted && score < targetScore) {
+                isMusicStarted = true;
+                bottomHintText.style.display = 'none';
+            }
+        }, { once: false });
+
+        function playPopSound() {
+            try {
+                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = audioCtx.createOscillator();
+                const gainNode = audioCtx.createGain();
+                
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(500, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(900, audioCtx.currentTime + 0.1);
+                
+                gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+                
+                osc.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+                
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.1);
+            } catch(e) {}
+        }
+
+        let score = 0;
+        const targetScore = 20;
+        const waterSection = document.getElementById('waterSection');
+        const scoreText = document.getElementById('scoreText');
+        const uiHeader = document.getElementById('uiHeader');
+        const giantContainer = document.getElementById('giantContainer');
+        const questionMark = document.getElementById('questionMark');
+        const couplePhoto = document.getElementById('couplePhoto');
+        const puzzleModal = document.getElementById('puzzleModal');
+        const fireworksContainer = document.getElementById('fireworksContainer');
+        const wishModal = document.getElementById('wishModal');
+        const typedText = document.getElementById('typedText');
+
+        let spawnInterval;
+        let ambientFireworksInterval = null;
+
+        function spawnKrathong() {
+            if (score >= targetScore) return;
+
+            const krathong = document.createElement('div');
+            krathong.classList.add('floating-krathong');
+            
+            const testImg = new Image();
+            testImg.src = 'กระทง.png';
+            testImg.onerror = () => krathong.classList.add('no-image');
+
+            const randomY = Math.random() * (waterSection.clientHeight - 80);
+            krathong.style.top = randomY + 'px';
+            krathong.style.left = '-70px';
+
+            waterSection.appendChild(krathong);
+
+            let currentLeft = -70;
+            const speed = 2.0 + Math.random() * 1.5; 
+            
+            const moveInterval = setInterval(() => {
+                currentLeft += speed;
+                krathong.style.left = currentLeft + 'px';
+
+                if (currentLeft > waterSection.clientWidth + 70) {
+                    clearInterval(moveInterval);
+                    krathong.remove();
+                }
+            }, 25);
+
+            krathong.addEventListener('click', (e) => {
+                e.stopPropagation();
+                playPopSound();
+                score++;
+                scoreText.innerText = `เก็บกระทง: ${score} / ${targetScore}`;
+                clearInterval(moveInterval);
+                krathong.remove();
+
+                if (score >= targetScore) {
+                    endMinigame();
+                }
+            });
+        }
+
+        spawnInterval = setInterval(spawnKrathong, 650);
+
+        function endMinigame() {
+            clearInterval(spawnInterval);
+            document.querySelectorAll('.floating-krathong').forEach(k => k.remove());
+            uiHeader.style.display = 'none';
+            giantContainer.style.display = 'block';
+
+            const testGiant = new Image();
+            testGiant.src = 'กระทง.png';
+            testGiant.onerror = () => document.getElementById('giantKrathong').classList.add('no-image');
+        }
+
+        questionMark.addEventListener('click', () => {
+            puzzleModal.style.display = 'flex';
+            document.getElementById('puzzleGrid').style.display = 'grid';
+            document.getElementById('completedPreview').style.display = 'none';
+            document.getElementById('successText').style.display = 'none';
+            initPuzzle();
+        });
+
+        let puzzlePieces = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+        let currentOrder = [...puzzlePieces];
+        let draggedIndex = null;
+
+        function isSorted(arr) {
+            return arr.every((val, i) => val === puzzlePieces[i]);
+        }
+
+        function initPuzzle() {
+            do {
+                currentOrder.sort(() => Math.random() - 0.5);
+            } while (isSorted(currentOrder)); 
+            renderPuzzle();
+        }
+
+        function renderPuzzle() {
+            const grid = document.getElementById('puzzleGrid');
+            grid.innerHTML = '';
+
+            currentOrder.forEach((pieceIndex, currentIndex) => {
+                const piece = document.createElement('div');
+                piece.classList.add('puzzle-piece');
+                piece.setAttribute('draggable', 'true');
+                
+                const x = (pieceIndex % 3) * 88;
+                const y = Math.floor(pieceIndex / 3) * 158;
+                piece.style.backgroundPosition = `-${x}px -${y}px`;
+                piece.dataset.index = currentIndex;
+
+                piece.addEventListener('dragstart', (e) => {
+                    draggedIndex = currentIndex;
+                    piece.classList.add('dragging');
+                    e.dataTransfer.setData('text/plain', currentIndex);
+                });
+
+                piece.addEventListener('dragend', () => {
+                    piece.classList.remove('dragging');
+                    document.querySelectorAll('.puzzle-piece').forEach(p => p.classList.remove('drag-over'));
+                });
+
+                piece.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    piece.classList.add('drag-over');
+                });
+
+                piece.addEventListener('dragleave', () => {
+                    piece.classList.remove('drag-over');
+                });
+
+                piece.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    piece.classList.remove('drag-over');
+                    const targetIndex = parseInt(piece.dataset.index);
+                    if (draggedIndex !== null && draggedIndex !== targetIndex) {
+                        let temp = currentOrder[draggedIndex];
+                        currentOrder[draggedIndex] = currentOrder[targetIndex];
+                        currentOrder[targetIndex] = temp;
+                        renderPuzzle();
+
+                        if (isSorted(currentOrder)) {
+                            onPuzzleCompleted();
+                        }
+                    }
+                });
+
+                let touchStartX = 0;
+                let touchStartY = 0;
+
+                piece.addEventListener('touchstart', (e) => {
+                    draggedIndex = currentIndex;
+                    touchStartX = e.touches[0].clientX;
+                    touchStartY = e.touches[0].clientY;
+                    piece.classList.add('dragging');
+                }, { passive: true });
+
+                piece.addEventListener('touchmove', (e) => {
+                    e.preventDefault();
+                    const touchCurrentX = e.touches[0].clientX;
+                    const touchCurrentY = e.touches[0].clientY;
+                    const targetElement = document.elementFromPoint(touchCurrentX, touchCurrentY);
+                    
+                    document.querySelectorAll('.puzzle-piece').forEach(p => p.classList.remove('drag-over'));
+                    if (targetElement && targetElement.classList.contains('puzzle-piece')) {
+                        targetElement.classList.add('drag-over');
+                    }
+                }, { passive: false });
+
+                piece.addEventListener('touchend', (e) => {
+                    piece.classList.remove('dragging');
+                    document.querySelectorAll('.puzzle-piece').forEach(p => p.classList.remove('drag-over'));
+                    const touchEndX = e.changedTouches[0].clientX;
+                    const touchEndY = e.changedTouches[0].clientY;
+                    
+                    const targetElement = document.elementFromPoint(touchEndX, touchEndY);
+                    if (targetElement && targetElement.classList.contains('puzzle-piece')) {
+                        const targetIndex = parseInt(targetElement.dataset.index);
+                        if (draggedIndex !== null && draggedIndex !== targetIndex) {
+                            let temp = currentOrder[draggedIndex];
+                            currentOrder[draggedIndex] = currentOrder[targetIndex];
+                            currentOrder[targetIndex] = temp;
+                            renderPuzzle();
+
+                            if (isSorted(currentOrder)) {
+                                onPuzzleCompleted();
+                            }
+                        }
+                    }
+                    draggedIndex = null;
+                });
+
+                grid.appendChild(piece);
+            });
+        }
+
+        function onPuzzleCompleted() {
+            document.getElementById('puzzleGrid').style.display = 'none';
+            document.getElementById('completedPreview').style.display = 'block';
+            document.getElementById('successText').style.display = 'block';
+            
+            triggerIntenseFireworks();
+
+            setTimeout(() => {
+                puzzleModal.style.display = 'none';
+                questionMark.style.display = 'none';
+                couplePhoto.style.display = 'block';
+                
+                // เปลี่ยนข้อความเป็น "ลองแตะที่รูปของเราดูสิ" (สีขาว) ไว้ที่ด้านล่างสุด
+                bottomHintText.innerText = "ลองแตะที่รูปของเราดูสิ";
+                bottomHintText.style.display = 'block';
+
+                startAmbientFireworks();
+            }, 4000);
+        }
+
+        function triggerIntenseFireworks() {
+            fireworksContainer.style.display = 'block';
+            const colors = ['#ff69b4', '#ff1493', '#ffb6c1', '#ffff00', '#00ffff', '#ffffff', '#ff4500'];
+            
+            for (let burst = 0; burst < 8; burst++) {
+                setTimeout(() => {
+                    const startX = 10 + Math.random() * 80;
+                    const startY = 10 + Math.random() * 70;
+                    const color = colors[Math.floor(Math.random() * colors.length)];
+
+                    for (let i = 0; i < 60; i++) {
+                        const particle = document.createElement('div');
+                        particle.classList.add('firework-particle');
+                        particle.style.left = startX + '%';
+                        particle.style.top = startY + '%';
+                        particle.style.backgroundColor = color;
+                        particle.style.boxShadow = `0 0 12px ${color}`;
+
+                        const angle = Math.random() * Math.PI * 2;
+                        const distance = 100 + Math.random() * 200;
+                        const tx = Math.cos(angle) * distance;
+                        const ty = Math.sin(angle) * distance;
+
+                        particle.style.setProperty('--tx', tx + 'px');
+                        particle.style.setProperty('--ty', ty + 'px');
+
+                        fireworksContainer.appendChild(particle);
+                        setTimeout(() => particle.remove(), 2500);
+                    }
+                }, burst * 500);
+            }
+
+            setTimeout(() => { 
+                if(!ambientFireworksInterval) {
+                    fireworksContainer.style.display = 'none'; 
+                }
+                fireworksContainer.innerHTML = ''; 
+            }, 5500);
+        }
+
+        function startAmbientFireworks() {
+            fireworksContainer.style.display = 'block';
+            const colors = ['#ff69b4', '#ff1493', '#ffb6c1', '#ffff00', '#00ffff', '#ffffff'];
+
+            ambientFireworksInterval = setInterval(() => {
+                const startX = 10 + Math.random() * 80;
+                const startY = 10 + Math.random() * 70;
+                const color = colors[Math.floor(Math.random() * colors.length)];
+
+                for (let i = 0; i < 45; i++) {
+                    const particle = document.createElement('div');
+                    particle.classList.add('firework-particle');
+                    particle.style.left = startX + '%';
+                    particle.style.top = startY + '%';
+                    particle.style.backgroundColor = color;
+                    particle.style.boxShadow = `0 0 10px ${color}`;
+
+                    const angle = Math.random() * Math.PI * 2;
+                    const distance = 80 + Math.random() * 160;
+                    const tx = Math.cos(angle) * distance;
+                    const ty = Math.sin(angle) * distance;
+
+                    particle.style.setProperty('--tx', tx + 'px');
+                    particle.style.setProperty('--ty', ty + 'px');
+
+                    fireworksContainer.appendChild(particle);
+                    setTimeout(() => particle.remove(), 2200);
+                }
+            }, 1500);
+        }
+
+        const wishMessage = "ลอยกระทงปีนี้\n
+หนูขอให้พี่มีความสุขมากๆ นะ\n
+ขอให้พี่สมหวังทุกอย่างที่ตั้งใจ\n
+งานราบรื่น ไม่เหนื่อยเกินไป\n
+และมีแต่ความสบายใจนะ\n
+ขอให้ทุกคำอธิษฐานของพี่เป็นจริง\n
+แล้วก็ขอให้หนูได้อยู่กวนใจ\n
+และเป็นความสุขให้พี่ไปเรื่อยๆเลย 🌙✨\n
+ขอให้สุขภาพแข็งแรง ไม่เจ็บไม่ป่วย\n
+อะไรที่ทำให้พี่เหนื่อยหรือเครียด\n
+ก็ขอให้ลอยไปกับกระทงคืนนี้ให้หมด\n
+ขอให้มีแต่เรื่องดีๆ และรอยยิ้ม\n
+เข้ามาในทุกวันของพี่\n
+พักผ่อนเยอะๆ มีแรงกายแรงใจดีๆในทุกวัน\n
+เรื่องหนักใจหรือเรื่องไม่ดี\n
+ขอให้ผ่านพ้นไปได้ด้วยดีนะ\n
+ขอให้พี่เจอแต่สิ่งดีๆ คนดีๆ\n
+ไม่ว่าวันข้างหน้าจะเป็นยังไง\n
+หนูอยู่ตรงนี้คอยซัพพอร์ตพี่เสมอนะคะ 🫶🌷\n
+สุดท้ายขอให้เราอยู่ข้างๆกัน\n
+แบบนี้ไปนานๆ นะคะ\n
+อยู่รอความสำเร็จของหนู\n
+และลอยกระทงด้วยกันในปีหน้านะคะ🤍";
+        let isTypingStarted = false;
+
+        couplePhoto.addEventListener('click', () => {
+            bottomHintText.style.display = 'none'; // ซ่อนข้อความเมื่อกดที่รูปแล้ว
+            wishModal.style.display = 'flex';
+            if (!isTypingStarted) {
+                isTypingStarted = true;
+                typeWriter(wishMessage, 0);
+            }
+        });
+
+        function typeWriter(text, i) {
+            if (i < text.length) {
+                typedText.innerHTML += text.charAt(i);
+                setTimeout(() => typeWriter(text, i + 1), 60);
+            }
+        }
+
+        function closeWishModal() {
+            wishModal.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
