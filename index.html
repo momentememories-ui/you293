@@ -6,7 +6,7 @@
     <title>Loy Krathong Season🪷✨</title>
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-- {
+        * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
@@ -143,15 +143,17 @@
             50% { transform: translateX(-50%) scale(1.15); }
         }
 
+        /* ปรับขนาดรูปภาพคู่เป็นสัดส่วน 5:4 (กว้าง 250px สูง 200px) */
         .couple-photo {
             position: absolute;
-            top: -95px;
+            top: -65px;
             left: 50%;
             transform: translateX(-50%);
-            width: auto;
-            height: 240px;
-            max-width: 90vw;
-            object-fit: contain;
+            width: 250px;
+            height: 200px;
+            aspect-ratio: 5 / 4;
+            max-width: 85vw;
+            object-fit: cover;
             display: none;
             cursor: pointer;
             z-index: 25;
@@ -159,7 +161,7 @@
             outline: none !important;
             box-shadow: none !important;
             filter: none !important;
-            border-radius: 0 !important;
+            border-radius: 16px !important;
             animation: enticingPulse 1.5s infinite ease-in-out;
         }
 
@@ -168,10 +170,10 @@
             50% { transform: translateX(-50%) scale(1.06); }
         }
 
-        /* ข้อความล่างสุดเปลี่ยนเป็นสีขาวเรียบร้อยแล้ว */
+        /* ขยับข้อความล่างสุดขึ้นมาข้างบนอีกนิดนึง (จาก 25px เป็น 65px) */
         .bottom-hint-text {
             position: absolute;
-            bottom: 85px;
+            bottom: 65px;
             width: 100%;
             text-align: center;
             color: #ffffff;
@@ -208,7 +210,7 @@
 
         .puzzle-box {
             background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255, 240, 245, 0.95));
-            padding: 15px;
+            padding: 18px 15px;
             border-radius: 25px;
             text-align: center;
             width: 100%;
@@ -226,17 +228,17 @@
         .puzzle-box p {
             font-size: 0.8rem;
             color: #c71585;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
-        /* ขนาดกรอบจิ๊กซอว์สัดส่วน 4:5 (พื้นที่ภาพด้านใน 288x360) */
+        /* ปรับกรอบจิ๊กซอว์เป็นสัดส่วน 5:4 (กว้าง 300px สูง 240px) */
         .puzzle-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             grid-template-rows: repeat(3, 1fr);
             gap: 2px;
             width: 300px;
-            height: 372px;
+            height: 240px;
             margin: 0 auto 10px auto;
             background: rgba(255, 182, 193, 0.4);
             padding: 4px;
@@ -244,12 +246,12 @@
             border: 2px solid #ff1493;
         }
 
-        /* ชิ้นส่วนจิ๊กซอว์แต่ละช่องขนาด 96x120 (อัตราส่วน 4:5) */
+        /* ชิ้นส่วนจิ๊กซอว์แต่ละช่องขนาด 96x76px (รวม 3x3 = 288x228 ซึ่งคือสัดส่วน 5:4 เป๊ะ) */
         .puzzle-piece {
             width: 96px;
-            height: 120px;
+            height: 76px;
             background-image: url('photo1.jpg');
-            background-size: 288px 360px;
+            background-size: 288px 228px;
             cursor: grab;
             border-radius: 6px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.15);
@@ -279,10 +281,10 @@
             box-shadow: inset 0 0 15px #ff1493;
         }
 
-        /* ภาพตัวอย่างหลังต่อเสร็จสัดส่วน 4:5 */
+        /* ภาพตัวอย่างตอนต่อเสร็จ สัดส่วน 5:4 (กว้าง 300px สูง 240px) */
         .completed-preview {
-            width: 288px;
-            height: 360px;
+            width: 300px;
+            height: 240px;
             background-image: url('photo1.jpg');
             background-size: cover;
             background-position: center;
@@ -340,8 +342,6 @@
             width: 90%;
             max-width: 360px;
             max-height: 75vh;
-            display: flex;
-            flex-direction: column;
             padding: 25px 20px;
             border-radius: 25px;
             box-shadow: 0 15px 35px rgba(216, 27, 96, 0.3);
@@ -349,6 +349,8 @@
             border: 4px solid #ff69b4;
             transform: scale(0.8);
             animation: popUpWish 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            display: flex;
+            flex-direction: column;
         }
 
         @keyframes popUpWish {
@@ -358,33 +360,42 @@
         .wish-box-center h3 {
             color: #d81b60;
             font-size: 1.2rem;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             flex-shrink: 0;
         }
 
-        .wish-box-center p {
-            color: #880e4f;
-            font-size: 0.95rem;
-            line-height: 1.6;
-            white-space: pre-wrap;
-            min-height: 80px;
+        /* กล่องข้อความคำอธิษฐานที่สามารถเลื่อน (Scroll) ได้ */
+        .wish-scroll-area {
             overflow-y: auto;
-            padding: 0 6px;
+            max-height: 45vh;
+            padding: 0 8px;
+            margin-bottom: 15px;
             touch-action: pan-y;
             -webkit-overflow-scrolling: touch;
         }
 
-        .wish-box-center p::-webkit-scrollbar {
+        /* ตกแต่งแถบ Scrollbar ให้เข้ากับธีมสีชมพู */
+        .wish-scroll-area::-webkit-scrollbar {
             width: 5px;
         }
+        .wish-scroll-area::-webkit-scrollbar-track {
+            background: rgba(255, 182, 193, 0.3);
+            border-radius: 10px;
+        }
+        .wish-scroll-area::-webkit-scrollbar-thumb {
+            background: #ff69b4;
+            border-radius: 10px;
+        }
 
-        .wish-box-center p::-webkit-scrollbar-thumb {
-            background: #ffb6c1;
-            border-radius: 5px;
+        .wish-scroll-area p {
+            color: #880e4f;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            white-space: pre-wrap;
+            min-height: 80px;
         }
 
         .close-wish-btn {
-            margin-top: 15px;
             background: linear-gradient(135deg, #ff69b4, #d81b60);
             color: #fff;
             border: none;
@@ -393,8 +404,8 @@
             font-size: 0.9rem;
             cursor: pointer;
             box-shadow: 0 4px 10px rgba(216, 27, 96, 0.4);
-            flex-shrink: 0;
             align-self: center;
+            flex-shrink: 0;
         }
     </style>
 </head>
@@ -416,7 +427,7 @@
             </div>
         </div>
 
-        <!-- ข้อความล่างสุด (สีขาว) -->
+        <!-- ข้อความล่างสุด (ขยับขึ้นมาข้างบนอีกนิดนึง) -->
         <div class="bottom-hint-text" id="bottomHintText">แตะหน้าจอเพื่อเริ่มเพลง</div>
 
         <div class="modal-overlay" id="puzzleModal">
@@ -436,7 +447,9 @@
         <div class="wish-modal" id="wishModal">
             <div class="wish-box-center">
                 <h3>✨ คำอธิษฐาน ✨</h3>
-                <p id="typedText"></p>
+                <div class="wish-scroll-area" id="wishScrollArea">
+                    <p id="typedText"></p>
+                </div>
                 <button class="close-wish-btn" onclick="closeWishModal()">ปิด</button>
             </div>
         </div>
@@ -446,7 +459,6 @@
         const bgMusic = document.getElementById('bgMusic');
         const bottomHintText = document.getElementById('bottomHintText');
         
-        // แสดงข้อความ "แตะหน้าจอเพื่อเริ่มเพลง" ไว้ที่ด้านล่างสุดตอนเริ่มเปิดเว็บ
         bottomHintText.style.display = 'block';
 
         let isMusicStarted = false;
@@ -492,6 +504,7 @@
         const puzzleModal = document.getElementById('puzzleModal');
         const fireworksContainer = document.getElementById('fireworksContainer');
         const wishModal = document.getElementById('wishModal');
+        const wishScrollArea = document.getElementById('wishScrollArea');
         const typedText = document.getElementById('typedText');
 
         let spawnInterval;
@@ -585,8 +598,9 @@
                 piece.classList.add('puzzle-piece');
                 piece.setAttribute('draggable', 'true');
                 
+                // คำนวณตำแหน่งภาพให้ตรงกับขนาด 5:4 (ชิ้นละ 96px x 76px)
                 const x = (pieceIndex % 3) * 96;
-                const y = Math.floor(pieceIndex / 3) * 120;
+                const y = Math.floor(pieceIndex / 3) * 76;
                 piece.style.backgroundPosition = `-${x}px -${y}px`;
                 piece.dataset.index = currentIndex;
 
@@ -626,13 +640,8 @@
                     }
                 });
 
-                let touchStartX = 0;
-                let touchStartY = 0;
-
                 piece.addEventListener('touchstart', (e) => {
                     draggedIndex = currentIndex;
-                    touchStartX = e.touches[0].clientX;
-                    touchStartY = e.touches[0].clientY;
                     piece.classList.add('dragging');
                 }, { passive: true });
 
@@ -687,7 +696,6 @@
                 questionMark.style.display = 'none';
                 couplePhoto.style.display = 'block';
                 
-                // เปลี่ยนข้อความเป็น "ลองแตะที่รูปของเราดูสิ" (สีขาว) ไว้ที่ด้านล่างสุด
                 bottomHintText.innerText = "ลองแตะที่รูปของเราดูสิ";
                 bottomHintText.style.display = 'block';
 
@@ -784,7 +792,9 @@
 ขอให้ผ่านพ้นไปได้ด้วยดีนะ
 ขอให้พี่เจอแต่สิ่งดีๆ คนดีๆ
 ไม่ว่าวันข้างหน้าจะเป็นยังไง
-หนูอยู่ตรงนี้คอยซัพพอร์ตพี่\nเสมอนะคะ🫶🌷\n
+หนูอยู่ตรงนี้คอยซัพพอร์ตพี่
+เสมอนะคะ🫶🌷
+
 สุดท้ายขอให้เราอยู่ข้างๆกัน
 แบบนี้ไปนานๆ นะคะ
 อยู่รอความสำเร็จของหนู
@@ -792,7 +802,7 @@
         let isTypingStarted = false;
 
         couplePhoto.addEventListener('click', () => {
-            bottomHintText.style.display = 'none'; // ซ่อนข้อความเมื่อกดที่รูปแล้ว
+            bottomHintText.style.display = 'none';
             wishModal.style.display = 'flex';
             if (!isTypingStarted) {
                 isTypingStarted = true;
@@ -803,7 +813,8 @@
         function typeWriter(text, i) {
             if (i < text.length) {
                 typedText.innerHTML += text.charAt(i);
-                typedText.scrollTop = typedText.scrollHeight;
+                // เลื่อนตามข้อความลงมาอัตโนมัติขณะกำลังพิมพ์
+                wishScrollArea.scrollTop = wishScrollArea.scrollHeight;
                 setTimeout(() => typeWriter(text, i + 1), 60);
             }
         }
