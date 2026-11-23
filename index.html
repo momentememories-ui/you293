@@ -143,10 +143,10 @@
             50% { transform: translateX(-50%) scale(1.15); }
         }
 
-        /* รูปบนกระทงเป็นเต็มรูปเหมือนเดิม */
+        /* ขยับรูปบนกระทงลงมาอีกนิดนึง (จาก -95px เป็น -78px) */
         .couple-photo {
             position: absolute;
-            top: -95px;
+            top: -78px;
             left: 50%;
             transform: translateX(-50%);
             width: auto;
@@ -229,7 +229,6 @@
             margin-bottom: 10px;
         }
 
-        /* ปรับกรอบจิ๊กซอว์เป็นสัดส่วน 4:5 (กว้าง 250px สูง 312.5px -> ใช้ 250px x 312px) */
         .puzzle-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -244,7 +243,6 @@
             border: 2px solid #ff1493;
         }
 
-        /* ชิ้นส่วนจิ๊กซอว์แต่ละช่องขนาด 79px x 100px (รวม 3x3 = 237px x 300px) */
         .puzzle-piece {
             width: 79px;
             height: 100px;
@@ -279,7 +277,6 @@
             box-shadow: inset 0 0 15px #ff1493;
         }
 
-        /* ภาพตัวอย่างตอนต่อเสร็จ สัดส่วน 4:5 (กว้าง 250px สูง 312px) */
         .completed-preview {
             width: 250px;
             height: 312px;
@@ -593,7 +590,6 @@
                 piece.classList.add('puzzle-piece');
                 piece.setAttribute('draggable', 'true');
                 
-                // คำนวณตำแหน่งภาพให้ตรงกับขนาด 4:5 (ชิ้นละ 79px x 100px)
                 const x = (pieceIndex % 3) * 79;
                 const y = Math.floor(pieceIndex / 3) * 100;
                 piece.style.backgroundPosition = `-${x}px -${y}px`;
@@ -782,7 +778,7 @@
 ก็ขอให้ลอยไปกับกระทงคืนนี้ให้หมด
 ขอให้มีแต่เรื่องดีๆ และรอยยิ้ม
 เข้ามาในทุกวันของพี่
-พักผ่อนเยอะๆ มีแรงกายแรงใจดีๆในทุกวัน
+พักผ่อนเยอะๆ\nมีแรงกายแรงใจดีๆในทุกวัน
 เรื่องหนักใจหรือเรื่องไม่ดี
 ขอให้ผ่านพ้นไปได้ด้วยดีนะ
 ขอให้พี่เจอแต่สิ่งดีๆ คนดีๆ
